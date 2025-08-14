@@ -1,0 +1,45 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model SocialMedia
+@{
+    ViewData["Title"] = "Sosyal Medya Ekle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0">Sosyal Medya Ekle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Create" asp-controller="SocialMedia" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Başlık</label>
+                                    <input type="text" name="Title" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Icon</label>
+                                    <input type="text" name="Icon" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input type="text" name="Url" class="form-control" required />
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                    <a asp-action="SocialMediaList" class="btn btn-secondary">İptal</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

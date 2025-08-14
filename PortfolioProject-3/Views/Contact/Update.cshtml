@@ -1,0 +1,66 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model Contact
+@{
+    ViewData["Title"] = "İletişim Güncelle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h4 class="mb-0">İletişim Bilgilerini Güncelle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Update" asp-controller="Contact" method="post">
+                                <input type="hidden" name="Id" value="@Model.Id" />
+
+                                <div class="mb-3">
+                                    <label class="form-label">Başlık</label>
+                                    <input type="text" name="Title" value="@Model.Title" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Açıklama</label>
+                                    <textarea name="Description" class="form-control" rows="2" required>@Model.Description</textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Telefon 1</label>
+                                    <input type="text" name="Phone1" value="@Model.Phone1" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Telefon 2</label>
+                                    <input type="text" name="Phone2" value="@Model.Phone2" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email 1</label>
+                                    <input type="email" name="Email1" value="@Model.Email1" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email 2</label>
+                                    <input type="email" name="Email2" value="@Model.Email2" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Adres</label>
+                                    <textarea name="Address" class="form-control" rows="2" required>@Model.Address</textarea>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model Testimonial
+@{
+    ViewData["Title"] = "Referans Ekle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0">Referans Ekle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Create" asp-controller="Testimonial" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Ad Soyad</label>
+                                    <input type="text" name="NameSurname" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Unvan</label>
+                                    <input type="text" name="Title" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Açıklama</label>
+                                    <textarea name="Description" class="form-control" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Görsel URL</label>
+                                    <input type="text" name="ImageUrl" class="form-control" required />
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                    <a asp-action="TestimonialList" class="btn btn-secondary">İptal</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model List<Testimonial>
+@{
+    ViewData["Title"] = "TestimonialList";
+    Layout = "~/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h4 class="page-title">Referanslar</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table mt-3">
+                                <thead>
+                                    <tr style="background-color: #FFDFBA;">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Ad Soyad</th>
+                                        <th scope="col">Unvan</th>
+                                        <th scope="col">Açıklama</th>
+                                        <th scope="col">Görsel</th>
+                                        <th scope="col">Sil</th>
+                                        <th scope="col">Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.NameSurname</td>
+                                            <td>@item.Title</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <img src="@item.ImageUrl" alt="@item.NameSurname" style="width:60px;height:60px;object-fit:cover;" />
+                                            </td>
+                                            <td><a href="/Testimonial/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+                                            <td><a href="/Testimonial/Update/@item.Id" class="btn btn-success">Güncelle</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="/Testimonial/Create/" class="btn btn-primary">Yeni Referans Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h4 class="page-title">Dashboard</h4>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card card-stats card-info">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="la la-briefcase"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Deneyimler</p>
+                                        <h4 class="card-title">@ViewBag.ExperienceCount</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stats card-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="la la-image"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Portfolyolar</p>
+                                        <h4 class="card-title">@ViewBag.PortfolioCount</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stats card-warning">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="la la-line-chart"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Yetenekler</p>
+                                        <h4 class="card-title">@ViewBag.SkillCount</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stats card-danger">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="la la-envelope"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Mesajlar</p>
+                                        <h4 class="card-title">@ViewBag.MessageCount</h4>
+                                        <small>Okunmamış: @ViewBag.UnreadMessageCount</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card" style="height: 350px;">
+                        <div class="card-header"><h4 class="card-title">Yetenek Dağılımı</h4></div>
+                        <div class="card-body" style="height: calc(100% - 60px);">
+                            <canvas id="skillChart" style="width:100%; height:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card" style="height: 350px;">
+                        <div class="card-header"><h4 class="card-title">Mesaj Durumu</h4></div>
+                        <div class="card-body" style="height: calc(100% - 60px);">
+                            <canvas id="messageChart" style="width:100%; height:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const skillCtx = document.getElementById('skillChart').getContext('2d');
+    new Chart(skillCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.SkillLabels)),
+            datasets: [{
+                label: 'Yetenekler',
+                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.SkillValues)),
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+
+    const messageCtx = document.getElementById('messageChart').getContext('2d');
+    new Chart(messageCtx, {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.MessageLabels)),
+            datasets: [{
+                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.MessageValues)),
+                backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>

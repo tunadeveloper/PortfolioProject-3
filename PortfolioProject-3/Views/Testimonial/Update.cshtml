@@ -1,0 +1,52 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model Testimonial
+@{
+    ViewData["Title"] = "Referans Güncelle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h4 class="mb-0">Referans Güncelle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="Update" asp-controller="Testimonial" method="post">
+                                <input type="hidden" name="Id" value="@Model.Id" />
+
+                                <div class="mb-3">
+                                    <label class="form-label">Ad Soyad</label>
+                                    <input type="text" name="NameSurname" value="@Model.NameSurname" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Unvan</label>
+                                    <input type="text" name="Title" value="@Model.Title" class="form-control" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Açıklama</label>
+                                    <textarea name="Description" class="form-control" rows="4" required>@Model.Description</textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Görsel URL</label>
+                                    <input type="text" name="ImageUrl" value="@Model.ImageUrl" class="form-control" required />
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                    <a asp-action="TestimonialList" class="btn btn-secondary">İptal</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

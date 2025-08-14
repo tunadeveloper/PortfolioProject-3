@@ -1,0 +1,36 @@
+﻿@using PortfolioProject_3.DataAccess.Entities
+@model Message
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h4 class="page-title">Mesaj Detayı</h4>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p><strong>Ad Soyad:</strong> @Model.NameSurname</p>
+                            <p><strong>Email:</strong> @Model.Email</p>
+                            <p><strong>Konu:</strong> @Model.Subject</p>
+                            <p><strong>Gönderme Tarihi:</strong> @Model.SendDate.ToString("dd.MM.yyyy HH:mm")</p>
+                            <p><strong>Mesaj:</strong></p>
+                            <p>@Model.MessageDetail</p>
+
+                            <div class="d-flex justify-content-between mt-3">
+                                @if (!Model.IsRead)
+                                {
+                                    <a href="/Message/MarkAsRead/@Model.Id" class="btn btn-success">Mesajı Okudum</a>
+                                }
+                                <a href="/Message/MessageList" class="btn btn-secondary">Geri Dön</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
